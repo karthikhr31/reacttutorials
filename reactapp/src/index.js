@@ -1,21 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-function People(props){
-	return <h1>hello {props.name}{props.show}</h1>
+class Clock extends React.Component{
+constructor(props){
+	super(props);
+	this.state ={
+		date : new Date()
+	}
 }
-// class People extends React.Component{
-// 	render(){
-// 		return <h1>hello {this.props.name}</h1>
-// 	}
-// }
-function Show(){
-	return <div>
-		<People name='Sagar' show='Ramesh'/>
-		<People name='Venkatesh' show=''/>
-	</div>
+componentDidMount(){
+	this.timer= setInterval(()=> this.start(),1000)
+
+}
+componentWillUnmount(){
+clearInterval(this.timer)
+}
+start(){
+	this.setState({
+		date: new Date()
+	});
+}
+	render(){
+	return <h1>{this.state.date.toLocaleTimeString()}</h1>
+}
 }
 ReactDOM.render(
-<Show/>,
+<Clock/>,
 document.getElementById('root')
 	);
