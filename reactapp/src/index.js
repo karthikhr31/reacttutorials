@@ -1,29 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-class Clock extends React.Component{
+
+class Inc extends React.Component{
 constructor(props){
 	super(props);
-	this.state ={
-		date : new Date()
+	this.state ={counter : 0}
+
+	}
+	increment =(event)=>{
+		event.preventDefault();
+		this.setState({
+			counter : this.state.counter + 1
+		});
+	}
+	render(){
+		return <button onClick={this.increment}>value is {this.state.counter}</button>
 	}
 }
-componentDidMount(){
-	this.timer= setInterval(()=> this.start(),1000)
 
-}
-componentWillUnmount(){
-clearInterval(this.timer)
-}
-start(){
-	this.setState({
-		date: new Date()
-	});
-}
-	render(){
-	return <h1>{this.state.date.toLocaleTimeString()}</h1>
-}
-}
 ReactDOM.render(
-<Clock/>,
+<Inc/>,
 document.getElementById('root')
-	);
+	)
